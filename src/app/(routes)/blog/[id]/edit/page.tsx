@@ -8,9 +8,9 @@ import { headers } from "next/headers";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { id } = params;
   const blog = await getBlogById(id);
   const url = `${process.env.BASE_URL}/blog/${blog?.id}/edit`;
 
@@ -37,12 +37,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function EditPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default async function EditPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const post = await getBlogById(id);
   const categories = await getCategories();
   const user = await auth.api.getSession({ headers: await headers() });

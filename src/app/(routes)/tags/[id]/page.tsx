@@ -6,9 +6,9 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { id } = params;
 
   return {
     title: `${id} | Category`,
@@ -26,8 +26,8 @@ export async function generateMetadata({
   };
 }
 
-const TagsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const TagsPage = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
   const blogs = await getBlog();
   const filteredBlogs = blogs.filter((b) =>
     b.tags.find((t) => t.tag.slug.includes(id))

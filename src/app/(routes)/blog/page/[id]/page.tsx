@@ -9,7 +9,7 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const { id } = await params;
+  const { id } = params;
   const url = `${process.env.BASE_URL}/blog/page/${id}`;
 
   return {
@@ -35,7 +35,7 @@ export async function generateMetadata({
 }
 
 const AllBlogPage = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = params;
   const currentPage = Number(id) || 1;
   const POSTS_PER_PAGE = 12;
   const skip = (currentPage - 1) * POSTS_PER_PAGE;
