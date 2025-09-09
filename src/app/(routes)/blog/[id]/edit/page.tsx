@@ -5,13 +5,11 @@ import { Metadata } from "next";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-export async function generateMetadata({
-  params,
-}: {
+export async function generateMetadata(props: {
   params: { id: string };
 }): Promise<Metadata> {
-  const { id } = params;
-  const blog = await getBlogById(id);
+  const params = await props.params;
+  const blog = await getBlogById(params.id);
   const url = `${process.env.BASE_URL}/blog/${blog?.id}/edit`;
 
   return {
@@ -37,9 +35,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function EditPage({ params }: { params: { id: string } }) {
-  const { id } = params;
-  const post = await getBlogById(id);
+export default async function EditPage(props: { params: { id: string } }) {
+  const params = await props.params;
+  const post = await getBlogById(params.id);
   const categories = await getCategories();
   const user = await auth.api.getSession({ headers: await headers() });
   const owner = user?.user.id === post?.authorId;

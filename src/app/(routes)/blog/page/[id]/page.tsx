@@ -4,16 +4,14 @@ import DiscoverBlog from "./DiscoverBlog";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
+export async function generateMetadata(props: {
   params: { id: string };
 }): Promise<Metadata> {
-  const { id } = params;
-  const url = `${process.env.BASE_URL}/blog/page/${id}`;
+  const params = await props.params;
+  const url = `${process.env.BASE_URL}/blog/page/${params.id}`;
 
   return {
-    title: `Discover Blog on Page ${id}`,
+    title: `Discover Blog on Page ${params.id}`,
     description: `Discover all blog on this website here`,
     alternates: {
       canonical: url,
@@ -21,7 +19,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: url,
-      title: `Discover Blog on Page ${id}`,
+      title: `Discover Blog on Page ${params.id}`,
       description: `Discover all blog on this website here`,
       images: [
         {
@@ -34,16 +32,20 @@ export async function generateMetadata({
   };
 }
 
-const AllBlogPage = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
-  const currentPage = Number(id) || 1;
+const AllBlogPage = async (props: { params: { id: string } }) => {
+  const params = await props.params;
+  const currentPage = Number(params.id) || 1;
   const POSTS_PER_PAGE = 12;
   const skip = (currentPage - 1) * POSTS_PER_PAGE;
   const blog_post = await getBlog(skip, POSTS_PER_PAGE);
   const total_posts = await prisma.post.count();
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <DiscoverBlog blog_post={blog_post} id={id} total_posts={total_posts} />
+      <DiscoverBlog
+        blog_post={blog_post}
+        id={params.id}
+        total_posts={total_posts}
+      />
     </Suspense>
   );
 };

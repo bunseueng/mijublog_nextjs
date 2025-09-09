@@ -1,6 +1,6 @@
-import { Server, Socket } from 'socket.io';
+import {  Socket } from 'socket.io';
 
-const socketHandler = (socket: Socket, io: Server): void => {
+const socketHandler = (socket: Socket): void => {
   console.log('A user connected:', socket.id);
 
   socket.on('send_comment', (message: string) => {

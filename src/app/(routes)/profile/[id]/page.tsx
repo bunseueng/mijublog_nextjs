@@ -6,14 +6,14 @@ import { User, UserType } from "@/types/BlogPost";
 import { getFollowers, getFollowing } from "@/app/data/user/follow/getFollower";
 import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
+export async function generateMetadata(props: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
+  const params = await props.params;
   const users = await getUsers();
-  const username = id ? decodeURIComponent(id.replace(/^@/, "")) : "";
+  const username = params.id
+    ? decodeURIComponent(params.id.replace(/^@/, ""))
+    : "";
 
   const user_data = users.find((u) => u.name === username.slice(1));
 
@@ -39,11 +39,13 @@ export async function generateMetadata({
   };
 }
 
-const ProfilePage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const ProfilePage = async (props: { params: Promise<{ id: string }> }) => {
+  const params = await props.params;
   const users = await getUsers();
   const blogs = await getBlog();
-  const username = id ? decodeURIComponent(id.replace(/^@/, "")) : "";
+  const username = params.id
+    ? decodeURIComponent(params.id.replace(/^@/, ""))
+    : "";
 
   const user_data = users.find((u) => u.name === username.slice(1));
   if (!user_data) {
