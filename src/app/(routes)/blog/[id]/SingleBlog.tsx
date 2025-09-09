@@ -77,6 +77,9 @@ const SingleBlog = ({
   );
   const hasLike = !!currentUserLike;
   const owner = session?.user.id === blog_post?.authorId;
+  const isSaved = savedPost.filter(
+    (s) => s.userId === session?.user.id && s.postId === blog_post?.id
+  );
 
   const addReplyToComment = useCallback(
     (
@@ -507,7 +510,7 @@ const SingleBlog = ({
                       className="group-hover:scale-110 transition-transform sm:w-5 sm:h-5"
                     />
                     <span className="text-xs sm:text-sm font-medium hidden md:inline">
-                      {savedPost.length > 0 ? "Saved" : "Save"}
+                      {isSaved.length > 0 ? "Saved" : "Save"}
                     </span>
                   </button>
                   <button

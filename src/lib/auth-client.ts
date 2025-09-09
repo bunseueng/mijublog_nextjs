@@ -15,7 +15,7 @@ export const authClient = createAuthClient({
       },
     },
   },
-  baseURL: process.env.BASE_URL || "http://localhost:3000",
+  baseURL: process.env.BASE_URL || "https://mijublog.vercel.app",
 });
 
 export type Session = typeof authClient.$Infer.Session;
