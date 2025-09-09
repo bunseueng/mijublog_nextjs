@@ -11,12 +11,12 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const { id } = params;
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { id } = await props.params;
   const blog = await getBlogById(id);
   const url = `${process.env.BASE_URL}/blog/${blog?.id}`;
 
@@ -43,8 +43,8 @@ export async function generateMetadata({
   };
 }
 
-const BlogPost = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const BlogPost = async (props: PageProps) => {
+  const { id } = await props.params;
   const blog_post = await getBlogById(id);
   const comments = await getComment(blog_post?.id as string);
   const currentUser = await auth.api.getSession({ headers: await headers() });

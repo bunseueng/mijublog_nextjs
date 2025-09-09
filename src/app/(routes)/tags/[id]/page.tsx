@@ -3,32 +3,34 @@ import { getBlog } from "@/app/data/blog/get-blog";
 import FeatureBlog from "@/components/home/FeatureBlog";
 import { Metadata } from "next";
 
-export async function generateMetadata(props: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const params = await props.params;
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { id } = await props.params;
 
   return {
-    title: `${params.id} | Category`,
+    title: `${id} | Category`,
     description: `Discover Blog by Tags`,
-    keywords: [`${params.id}`],
+    keywords: [`${id}`],
     alternates: {
-      canonical: `${process.env.BASE_URL}/tags/${params.id}`,
+      canonical: `${process.env.BASE_URL}/tags/${id}`,
     },
     openGraph: {
       type: "website",
-      url: `${process.env.BASE_URL}/tags/${params.id}`,
-      title: `${params.id} | Category`,
+      url: `${process.env.BASE_URL}/tags/${id}`,
+      title: `${id} | Category`,
       description: `Discover Blog by Tags`,
     },
   };
 }
 
-const TagsPage = async (props: { params: { id: string } }) => {
-  const params = await props.params;
+const TagsPage = async (props: PageProps) => {
+  const { id } = await props.params;
   const blogs = await getBlog();
   const filteredBlogs = blogs.filter((b) =>
-    b.tags.find((t) => t.tag.slug.includes(params.id))
+    b.tags.find((t) => t.tag.slug.includes(id))
   );
   return (
     <div className="container mx-auto px-8">

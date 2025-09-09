@@ -4,12 +4,13 @@ import { getBlogById, getCategories } from "@/app/data/blog/get-blog";
 import { Metadata } from "next";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
-export async function generateMetadata(props: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const params = await props.params;
-  const blog = await getBlogById(params.id);
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const { id } = await props.params;
+  const blog = await getBlogById(id);
   const url = `${process.env.BASE_URL}/blog/${blog?.id}/edit`;
 
   return {
@@ -35,9 +36,9 @@ export async function generateMetadata(props: {
   };
 }
 
-export default async function EditPage(props: { params: { id: string } }) {
-  const params = await props.params;
-  const post = await getBlogById(params.id);
+export default async function EditPage(props: PageProps) {
+  const { id } = await props.params;
+  const post = await getBlogById(id);
   const categories = await getCategories();
   const user = await auth.api.getSession({ headers: await headers() });
   const owner = user?.user.id === post?.authorId;
