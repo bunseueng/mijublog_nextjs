@@ -14,7 +14,7 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
-      {
+      { 
         "name": "next"
       }
     ],
@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "websocket/sockets/index.js", "server.ts", "server.js", "websocket/app.js"],
+  "exclude": ["node_modules", "C:/Users/pc/Application Data"]
 }
