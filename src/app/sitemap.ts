@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mijublog.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mijudramablog.vercel.app'
 
   // Static routes - high priority pages
   const staticRoutes: MetadataRoute.Sitemap = [
