@@ -4,7 +4,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Terms and Conditions`,
     alternates: {
-      canonical: `${process.env.BASE_URL}/terms-and-conditions`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/terms-and-conditions`,
     },
     openGraph: {
       type: "website",

@@ -5,11 +5,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `About Us`,
     alternates: {
-      canonical: `${process.env.BASE_URL}/about-us`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/about-us`,
     },
     openGraph: {
       type: "website",
-      url: `${process.env.BASE_URL}/about-us`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/about-us`,
       title: `About Us`,
     },
   };

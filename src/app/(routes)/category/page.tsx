@@ -12,11 +12,11 @@ export async function generateMetadata(): Promise<Metadata> {
     description: `Discover Blog by Categories`,
     keywords: [`${displayedCategory}`],
     alternates: {
-      canonical: `${process.env.BASE_URL}/category`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/category`,
     },
     openGraph: {
       type: "website",
-      url: `${process.env.BASE_URL}/category`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/category`,
       title: `Discover Blog by Categories`,
       description: `Discover Blog by Categories`,
     },

@@ -21,11 +21,11 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     title: `${user_data?.name} Profile`,
     description: user_data?.description ? user_data?.description : null,
     alternates: {
-      canonical: `${process.env.BASE_URL}/@${user_data?.name}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/@${user_data?.name}`,
     },
     openGraph: {
       type: "website",
-      url: `${process.env.BASE_URL}/@${user_data?.name}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/@${user_data?.name}`,
       description: user_data?.description ? user_data?.description : undefined,
       title: `${user_data?.name} Profile`,
       images: [

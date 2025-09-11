@@ -7,11 +7,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Setting`,
     alternates: {
-      canonical: `${process.env.BASE_URL}/setting`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/setting`,
     },
     openGraph: {
       type: "website",
-      url: `${process.env.BASE_URL}/setting`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/setting`,
       title: `Setting`,
     },
   };

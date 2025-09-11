@@ -9,7 +9,7 @@ interface PageProps {
 }
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { id } = await props.params;
-  const url = `${process.env.BASE_URL}/blog/page/${id}`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/page/${id}`;
 
   return {
     title: `Discover Blog on Page ${id}`,

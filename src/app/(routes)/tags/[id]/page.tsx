@@ -15,11 +15,11 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     description: `Discover Blog by Tags`,
     keywords: [`${id}`],
     alternates: {
-      canonical: `${process.env.BASE_URL}/tags/${id}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/tags/${id}`,
     },
     openGraph: {
       type: "website",
-      url: `${process.env.BASE_URL}/tags/${id}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/tags/${id}`,
       title: `${id} | Category`,
       description: `Discover Blog by Tags`,
     },
