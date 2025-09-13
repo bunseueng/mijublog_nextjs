@@ -25,7 +25,7 @@ export const nunito = Nunito({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://mijudramablog.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://mijublogjjy.vercel.app"
   ),
   title: {
     default: "MijuBlog - Your Ultimate Blogging Platform",
